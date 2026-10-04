@@ -1,122 +1,192 @@
+import 'package:spiiiq/controllers/ads_controller.dart';
+import 'package:spiiiq/controllers/chat_controller.dart';
+import 'package:spiiiq/controllers/moderation_controller.dart';
+//import 'package:spiiiq/controllers/market_controller.dart';
+import 'package:spiiiq/controllers/referral_controller.dart';
+import 'package:spiiiq/controllers/reward_controller.dart';
+import 'package:spiiiq/controllers/status_controller.dart';
+import 'package:spiiiq/controllers/theme_controller.dart';
+import 'package:spiiiq/controllers/user_controller.dart';
+import 'package:spiiiq/pages/home.dart';
+import 'package:spiiiq/controllers/user_presence_controller.dart';
+import 'package:spiiiq/controllers/verified_controller.dart';
+import 'package:spiiiq/pages/forgotpassword.dart';
+import 'package:spiiiq/services/fcm_background.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+//import 'package:the_splendid_market/login/forgot_password.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:spiiiq/controllers/account_controller.dart';
+
+import 'package:spiiiq/controllers/e_login_controller.dart';
+
+import 'package:spiiiq/pages/earn_login.dart';
+
+import 'package:spiiiq/pages/onboarding.dart';
+import 'package:spiiiq/pages/policy.dart';
+import 'package:spiiiq/pages/profile.dart';
+
+//import 'package:the_splendid_market/productMarket/market/stores/market_desktop.dart';
+
+//import 'package:the_splendid_market/productMarket/market/stores/market_tablet.dart';
+
+//import 'package:the_splendid_market/vendor_dashboard/profile_settings.dart';
+
+import 'package:url_strategy/url_strategy.dart';
+
+import 'firebase_options.dart';
+
+final FluroRouter router = FluroRouter();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // ✅ Web clean URL
+  setPathUrlStrategy();
+
+  // ✅ Initialize Firebase ONLY (keep startup light)
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  //FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  // ✅ Run app immediately (VERY IMPORTANT for low RAM)
   runApp(const MyApp());
+
+  // 🔥 Initialize heavy services AFTER UI loads
+  _initBackgroundServices();
+}
+
+Future<void> _initBackgroundServices() async {
+  await GetStorage.init();
+
+  await Future.wait([
+    // FCMService.init(),
+    // LocalNotificationService.init(),
+  ]);
+}
+
+/// 🔥 LAZY CONTROLLER INITIALIZATION
+void initControllers() {
+  //  final Blockchain blockchainInstance = Blockchain();
+
+  Get.lazyPut(() => AuthController(), fenix: true);
+  //Get.lazyPut(() => CurrencyController(), fenix: true);
+  //  Get.lazyPut(() => WithdrawController1(), fenix: true);
+  //Get.lazyPut(() => BlocksController(), fenix: true);
+  Get.lazyPut(() => ModerationController(), fenix: true);
+  //Get.lazyPut(() => HistoryController(), fenix: true);
+  //Get.lazyPut(() => PbcMarketController(), fenix: true);
+  //  Get.lazyPut(() => TradeController(), fenix: true);
+  //Get.lazyPut(() => LiquidityController(), fenix: true);
+  Get.lazyPut(() => AccountController(), fenix: true);
+  //  Get.lazyPut(() => AddMoneyController(), fenix: true);
+  //Get.lazyPut(() => ExchangeController(), fenix: true);
+  //Get.lazyPut(() => TokenDataController(), fenix: true);
+  Get.lazyPut(() => ThemeController(), fenix: true);
+  Get.lazyPut(() => VerifiedController(), fenix: true);
+  Get.lazyPut(() => RewardController(), fenix: true);
+  Get.lazyPut(() => ReferController(), fenix: true);
+
+  // 🔥 Social / heavy controllers (NO permanent)
+  Get.lazyPut(() => UserPresenceController(), fenix: true);
+  Get.lazyPut(() => UserController(), fenix: true);
+  //Get.lazyPut(() => ChatController(), fenix: true);
+  Get.lazyPut(() => StatusController(), fenix: true);
+  //Get.put(StatusController(), permanent: true);
+  //Get.put(MarketController(), permanent: true);
+  //Get.lazyPut(() => MarketController(), fenix: true);
+  //Get.put(StatusController1(), permanent: true);
+  //Get.lazyPut(() => StatusController(), fenix: true);
+  //Get.lazyPut(() => ChannelController(), fenix: true);
+  Get.lazyPut(() => AdsController(), fenix: true);
+
+  // 🔹 HotGist category controllers — lazy so each is only created
+  // when its screen is first opened, and disposed (listeners
+  // cancelled via onClose) when no longer referenced.
+  //Get.lazyPut(() => ComedyGistController(), fenix: true);
+  //Get.lazyPut(() => PoliticsGistController(), fenix: true);
+  //Get.lazyPut(() => SportsGistController(), fenix: true);
+
+  //Get.lazyPut(() => SellController(), fenix: true);
+  //Get.lazyPut(() => ChannelProfileController(), fenix: true);
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  Color getMainColor(BuildContext context) {
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return isDarkMode ? Colors.black : Colors.black;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    // ✅ Initialize controllers lazily
+    initControllers();
+    return GetMaterialApp(
+      title: 'spiiiq',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: router.generator,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Onboarding(),
+        '/onboarding': (context) => const Onboarding(),
+        // '/preference': (context) => Preference(),
+        // '/walletdetails': (context) => WalletDetails(),
+        // '/selectaddress': (context) => SelectAddress(),
+        // '/send': (context) => Send(walletAddress: ''),
+        // '/lwallet': (context) => LocalWallet(),
+        // '/host': (context) => HostPxp(),
+        // '/vote': (context) => Vote(),
+        // '/join': (context) => JoinPxp(exchangeDetails: {}),
+        // '/receive': (context) => Receive(),
+        // '/cowriexd': (context) => CowriexDetails(),
+        // '/chartd': (context) => ChartDetails(),
+        // '/earnhome': (context) => EarnHome(),
+        '/home': (context) => Home(userName: '', userEmail: ''),
+        // '/history': (context) => TransactionHistory(),
+        // '/documentation': (context) => Documentation(),
+        '/login': (context) => const EarnLogin(),
+        '/signup': (context) => const EarnSignUp(),
+        '/forgotpassword': (context) => ForgotPassword(),
+        '/profile': (context) => ProfileScreen(),
+        '/policy': (context) => spiiiqRewardPolicyScreen(),
+        // '/verify': (context) => Verify(mnemonic: ''),
+        // '/confirm': (context) => Confirm(words: []),
+        // '/forgotc': (context) => ForgotConfirm(words: []),
+        // '/changepassword': (context) => ChangePassword(),
+        // '/addmoney': (context) => AddMoney(),
+        // '/withdraw': (context) => Withdraw(),
+        // '/exchange': (context) => Exchange(),
+        // '/pXp': (context) => Pxp(),
+        // '/pXphome': (context) {
+        //   final authController = Get.find<AuthController>();
+        //   final user = authController.currentUser;
+        //   if (user == null) return const EarnLogin();
+        //   return ExchangeUI(userId: user.uid);
+        // },
+        // '/blocks': (context) => Blocks(),
+        // '/cowriexdetails': (context) => CowriexDetails(),
+        // '/buy': (context) => Buy(),
+        // '/sell': (context) => Sell(),
+        // '/tokendata': (context) => TokenData(),
+        // '/walletaddress': (context) => WalletAddress(),
+        // '/publickey': (context) => PublicKey(),
+        // '/whitepaper': (context) => Documentation(),
+        // '/mine': (context) => Mine(),
+        // '/answer': (context) => Answer(),
+      },
     );
   }
 }
