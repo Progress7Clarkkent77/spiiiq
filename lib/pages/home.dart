@@ -2062,7 +2062,7 @@ class _HomeState extends State<Home> {
                     itemBuilder: (_) => [
                       _menuItem(
                         value: 'about',
-                        icon: Icons.card_giftcard_rounded,
+                        icon: Icons.info_outline_rounded,
                         label: 'About Us',
                         isDark: isDark,
                       ),
@@ -2225,6 +2225,7 @@ class _HomeState extends State<Home> {
                                   width: 22,
                                   height: 22,
                                   child: CircularProgressIndicator(
+                                    color: Colors.black,
                                     strokeWidth: 2.2,
                                   ),
                                 ),
@@ -2502,12 +2503,14 @@ class _HomeState extends State<Home> {
                                                           : Colors
                                                                 .grey
                                                                 .shade200,
-                                                      child: const Center(
+                                                      child: Center(
                                                         child: Text(
                                                           "loading",
                                                           style: TextStyle(
-                                                            color:
-                                                                Colors.blueGrey,
+                                                            color: isDark
+                                                                ? Colors.white
+                                                                : Colors.black,
+
                                                             fontStyle: FontStyle
                                                                 .italic,
                                                           ),
