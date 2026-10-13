@@ -1755,6 +1755,7 @@ import 'package:spiiiq/pages/public_profile.dart';
 import 'package:spiiiq/pages/status_screen.dart';
 import 'package:spiiiq/pages/withdrawal_page.dart';
 import 'package:spiiiq/widgets/report_reason_dialog.dart';
+import 'package:spiiiq/widgets/premium_dialogs.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
@@ -2055,7 +2056,14 @@ class _HomeState extends State<Home> {
                           themeCtrl.setLight();
                           break;
                         case 'logout':
-                          Get.find<AuthController>().logout();
+                          Get.dialog(
+                            PremiumLogoutDialog(
+                              isDark: isDark,
+                              onConfirm: () =>
+                                  Get.find<AuthController>().logout(),
+                            ),
+                            barrierColor: Colors.black54,
+                          );
                           break;
                       }
                     },
@@ -2955,7 +2963,7 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Sponsored',
+                          'Announcement',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
