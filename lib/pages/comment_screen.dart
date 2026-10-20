@@ -36,8 +36,6 @@ class _CommentScreenState extends State<CommentScreen> {
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
   // final CurrencyController currencyController = Get.put(CurrencyController());
   // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
-  // final PbcMarketController pbcMarketController =
-  //     Get.put(PbcMarketController());
 
   @override
   void initState() {

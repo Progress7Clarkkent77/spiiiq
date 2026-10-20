@@ -40,8 +40,6 @@ import 'package:url_launcher/url_launcher.dart';
 //   final IconNavigationHandler navigationHandler = IconNavigationHandler();
 //   // final CurrencyController currencyController = Get.put(CurrencyController());
 //   // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
-//   // final PbcMarketController pbcMarketController =
-//   //     Get.put(PbcMarketController());
 
 //   /// 🔹 Obfuscate email
 //   String obfuscateEmail(String email) {

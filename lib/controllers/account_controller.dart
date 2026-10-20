@@ -8,8 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:spiiiq/controllers/e_login_controller.dart';
 
-//import 'package:the_splendid_market/controllers/history_controller.dart';
-
 class AccountController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthController authController = Get.find<AuthController>();

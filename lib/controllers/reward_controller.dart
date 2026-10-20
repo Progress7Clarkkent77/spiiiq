@@ -63,10 +63,6 @@ class RewardController extends GetxController {
     await _incrementBalance(uid: uid, amount: 0.00010);
   }
 
-  Future<void> incrementMarketReward({required String uid}) async {
-    await _incrementBalance(uid: uid, amount: 0.0008);
-  }
-
   Future<void> incrementCommentReward({required String uid}) async {
     await _incrementBalance(uid: uid, amount: 0.0002);
   }

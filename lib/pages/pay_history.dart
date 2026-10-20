@@ -19,8 +19,6 @@ class _PayHistoryPageState extends State<PayHistoryPage> {
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
   // final CurrencyController currencyController = Get.put(CurrencyController());
   // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
-  // final PbcMarketController pbcMarketController =
-  //     Get.put(PbcMarketController());
 
   @override
   void initState() {

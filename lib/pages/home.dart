@@ -47,8 +47,7 @@
 //   final IconNavigationHandler navigationHandler = IconNavigationHandler();
 //   // final CurrencyController currencyController = Get.put(CurrencyController());
 //   // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
-//   // final PbcMarketController pbcMarketController =
-//   //     Get.put(PbcMarketController());
+
 //   final AvailableBalanceController balanceCtrl = Get.put(
 //     AvailableBalanceController(),
 //   );
@@ -1779,8 +1778,7 @@ class _HomeState extends State<Home> {
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
   // final CurrencyController currencyController = Get.put(CurrencyController());
   // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
-  // final PbcMarketController pbcMarketController =
-  //     Get.put(PbcMarketController());
+
   final AvailableBalanceController balanceCtrl = Get.put(
     AvailableBalanceController(),
   );
