@@ -3,8 +3,7 @@ import 'dart:math';
 
 import 'package:spiiiq/pages/policy.dart';
 import 'package:spiiiq/pages/term_of_use.dart';
-import 'package:spiiiq/controllers/chat_controller.dart';
-import 'package:spiiiq/controllers/chat_list_controller.dart';
+
 //import 'package:spiiiq/controllers/moderation_controller.dart';
 import 'package:spiiiq/controllers/reward_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
@@ -14,12 +13,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:spiiiq/BlockChain/blockchain_controller.dart';
 
 import 'package:spiiiq/widgets/loading_dialogue.dart';
 import 'package:spiiiq/widgets/premium_dialogs.dart';
-import 'package:spiiiq/controllers/chat_controller.dart';
-import 'package:spiiiq/controllers/chat_list_controller.dart';
 
 import 'dart:io' show Platform;
 

@@ -3,7 +3,7 @@
 // import 'package:get/get.dart';
 // //import 'package:otp_text_field/otp_text_field.dart';
 // //import 'package:otp_text_field/style.dart';
-// import 'package:spiiiq/BlockChain/blockchain_controller.dart';
+
 // import 'package:spiiiq/controllers/e_login_controller.dart';
 // import 'package:spiiiq/constant/colors.dart';
 // import 'package:otp_text_field/otp_field.dart';
@@ -19,7 +19,7 @@
 // // }
 
 // // class _ForgotPasswordState extends State<ForgotPassword> {
-// //   late Blockchain blockchainInstance;
+//
 // //   late AuthController _authController;
 
 // //   final TextEditingController _emailController = TextEditingController();
@@ -28,11 +28,6 @@
 // //   @override
 // //   void initState() {
 // //     super.initState();
-
-// //     blockchainInstance = Blockchain(); // ✅ Initialize here
-// //     _authController = Get.put(
-// //         AuthController(blockchainInstance)); // ✅ Pass Blockchain instance
-// //   }
 
 // //   @override
 // //   Widget build(BuildContext context) {
@@ -254,7 +249,7 @@
 // }
 
 // class _ForgotPasswordState extends State<ForgotPassword> {
-//   late Blockchain blockchainInstance;
+
 //   late AuthController authController;
 
 //   final TextEditingController emailCtrl = TextEditingController();
@@ -262,9 +257,6 @@
 //   @override
 //   void initState() {
 //     super.initState();
-//     blockchainInstance = Blockchain();
-//     authController = Get.put(AuthController(blockchainInstance));
-//   }
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -670,7 +662,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 // }
 
 // class _ChangePasswordState extends State<ChangePassword> {
-//   late Blockchain blockchainInstance;
+
 //   late AuthController _authController;
 
 //   String? newPassword;
@@ -680,11 +672,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 //   @override
 //   void initState() {
 //     super.initState();
-
-//     blockchainInstance = Blockchain(); // ✅ Initialize here
-//     _authController = Get.put(
-//         AuthController(blockchainInstance)); // ✅ Pass Blockchain instance
-//   }
 
 //   @override
 //   Widget build(BuildContext context) {

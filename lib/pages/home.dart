@@ -1742,11 +1742,11 @@ import 'package:spiiiq/controllers/account_controller.dart';
 import 'package:spiiiq/controllers/ads_controller.dart';
 import 'package:spiiiq/controllers/e_login_controller.dart';
 import 'package:spiiiq/controllers/balance_controller.dart';
-import 'package:spiiiq/controllers/chat_list_controller.dart';
+
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/pages/add_status.dart';
-import 'package:spiiiq/pages/chat_screen.dart';
+
 import 'package:spiiiq/pages/comment_screen.dart';
 import 'package:spiiiq/pages/pay_history.dart';
 import 'package:spiiiq/pages/policy.dart';
@@ -1774,7 +1774,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final ChatListController controller = Get.put(ChatListController());
   final ThemeController themeCtrl = Get.put(ThemeController());
   final AccountController accountController = Get.put(AccountController());
   final IconNavigationHandler navigationHandler = IconNavigationHandler();

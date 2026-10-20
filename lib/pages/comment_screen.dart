@@ -1,5 +1,5 @@
 import 'package:spiiiq/controllers/account_controller.dart';
-import 'package:spiiiq/controllers/chat_list_controller.dart';
+
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
@@ -31,8 +31,6 @@ class _CommentScreenState extends State<CommentScreen> {
   final ThemeController themeCtrl = Get.find<ThemeController>();
 
   final TextEditingController commentCtrl = TextEditingController();
-
-  final ChatListController controller = Get.put(ChatListController());
 
   final AccountController accountController = Get.put(AccountController());
   final IconNavigationHandler navigationHandler = IconNavigationHandler();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:spiiiq/controllers/account_controller.dart';
-import 'package:spiiiq/controllers/chat_list_controller.dart';
+
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/controllers/verified_controller.dart';
@@ -43,7 +43,6 @@ class AddStatus extends StatefulWidget {
 class _AddStatusState extends State<AddStatus> {
   static const int _maxLength = 80;
 
-  final ChatListController controller = Get.put(ChatListController());
   final ThemeController themeCtrl = Get.put(ThemeController());
   final AccountController accountController = Get.put(AccountController());
 
@@ -78,10 +77,6 @@ class _AddStatusState extends State<AddStatus> {
     statusCtrl = Get.put(StatusController());
 
     accountController.fetchUserInfo();
-    accountController.fetchWalletAddress();
-    accountController.toggleBalanceVisibility();
-    accountController.fetchWalletDetails();
-    accountController.fetchWalletData();
   }
 
   @override

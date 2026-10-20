@@ -2,13 +2,11 @@ import 'package:spiiiq/controllers/account_controller.dart';
 
 import 'package:spiiiq/controllers/e_login_controller.dart';
 
-import 'package:spiiiq/controllers/chat_list_controller.dart';
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/pages/add_status.dart';
 import 'package:spiiiq/pages/comment_screen.dart';
 import 'package:spiiiq/pages/public_profile.dart';
-import 'package:spiiiq/pages/referral_screen.dart';
 import 'package:spiiiq/widgets/report_reason_dialog.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -768,8 +766,6 @@ class StatusScreen extends StatefulWidget {
 
 class _StatusScreenState extends State<StatusScreen>
     with AutomaticKeepAliveClientMixin {
-  final ChatListController controller = Get.put(ChatListController());
-
   final ThemeController themeCtrl = Get.put(ThemeController());
 
   final AccountController accountController = Get.put(AccountController());

@@ -1,7 +1,6 @@
 import 'package:spiiiq/controllers/account_controller.dart';
 import 'package:spiiiq/controllers/e_login_controller.dart';
 
-import 'package:spiiiq/controllers/market_controller.dart';
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,7 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:spiiiq/pages/chat_screen.dart';
+
 import 'package:spiiiq/pages/comment_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 

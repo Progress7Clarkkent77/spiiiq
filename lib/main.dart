@@ -1,7 +1,7 @@
 import 'package:spiiiq/controllers/ads_controller.dart';
-import 'package:spiiiq/controllers/chat_controller.dart';
+
 import 'package:spiiiq/controllers/moderation_controller.dart';
-//import 'package:spiiiq/controllers/market_controller.dart';
+
 import 'package:spiiiq/controllers/referral_controller.dart';
 import 'package:spiiiq/controllers/reward_controller.dart';
 import 'package:spiiiq/controllers/status_controller.dart';
@@ -18,8 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-//import 'package:the_splendid_market/login/forgot_password.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:spiiiq/controllers/account_controller.dart';
@@ -31,12 +29,6 @@ import 'package:spiiiq/pages/earn_login.dart';
 import 'package:spiiiq/pages/onboarding.dart';
 import 'package:spiiiq/pages/policy.dart';
 import 'package:spiiiq/pages/profile.dart';
-
-//import 'package:the_splendid_market/productMarket/market/stores/market_desktop.dart';
-
-//import 'package:the_splendid_market/productMarket/market/stores/market_tablet.dart';
-
-//import 'package:the_splendid_market/vendor_dashboard/profile_settings.dart';
 
 import 'package:url_strategy/url_strategy.dart';
 
@@ -73,21 +65,12 @@ Future<void> _initBackgroundServices() async {
 
 /// 🔥 LAZY CONTROLLER INITIALIZATION
 void initControllers() {
-  //  final Blockchain blockchainInstance = Blockchain();
-
   Get.lazyPut(() => AuthController(), fenix: true);
-  //Get.lazyPut(() => CurrencyController(), fenix: true);
-  //  Get.lazyPut(() => WithdrawController1(), fenix: true);
-  //Get.lazyPut(() => BlocksController(), fenix: true);
+
   Get.lazyPut(() => ModerationController(), fenix: true);
-  //Get.lazyPut(() => HistoryController(), fenix: true);
-  //Get.lazyPut(() => PbcMarketController(), fenix: true);
-  //  Get.lazyPut(() => TradeController(), fenix: true);
-  //Get.lazyPut(() => LiquidityController(), fenix: true);
+
   Get.lazyPut(() => AccountController(), fenix: true);
-  //  Get.lazyPut(() => AddMoneyController(), fenix: true);
-  //Get.lazyPut(() => ExchangeController(), fenix: true);
-  //Get.lazyPut(() => TokenDataController(), fenix: true);
+
   Get.lazyPut(() => ThemeController(), fenix: true);
   Get.lazyPut(() => VerifiedController(), fenix: true);
   Get.lazyPut(() => RewardController(), fenix: true);
@@ -98,23 +81,12 @@ void initControllers() {
   Get.lazyPut(() => UserController(), fenix: true);
   //Get.lazyPut(() => ChatController(), fenix: true);
   Get.lazyPut(() => StatusController(), fenix: true);
-  //Get.put(StatusController(), permanent: true);
-  //Get.put(MarketController(), permanent: true);
-  //Get.lazyPut(() => MarketController(), fenix: true);
-  //Get.put(StatusController1(), permanent: true);
-  //Get.lazyPut(() => StatusController(), fenix: true);
-  //Get.lazyPut(() => ChannelController(), fenix: true);
+
   Get.lazyPut(() => AdsController(), fenix: true);
 
   // 🔹 HotGist category controllers — lazy so each is only created
   // when its screen is first opened, and disposed (listeners
   // cancelled via onClose) when no longer referenced.
-  //Get.lazyPut(() => ComedyGistController(), fenix: true);
-  //Get.lazyPut(() => PoliticsGistController(), fenix: true);
-  //Get.lazyPut(() => SportsGistController(), fenix: true);
-
-  //Get.lazyPut(() => SellController(), fenix: true);
-  //Get.lazyPut(() => ChannelProfileController(), fenix: true);
 }
 
 class MyApp extends StatelessWidget {
@@ -142,18 +114,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Onboarding(),
         '/onboarding': (context) => const Onboarding(),
-        // '/preference': (context) => Preference(),
-        // '/walletdetails': (context) => WalletDetails(),
-        // '/selectaddress': (context) => SelectAddress(),
-        // '/send': (context) => Send(walletAddress: ''),
-        // '/lwallet': (context) => LocalWallet(),
-        // '/host': (context) => HostPxp(),
-        // '/vote': (context) => Vote(),
-        // '/join': (context) => JoinPxp(exchangeDetails: {}),
-        // '/receive': (context) => Receive(),
-        // '/cowriexd': (context) => CowriexDetails(),
-        // '/chartd': (context) => ChartDetails(),
-        // '/earnhome': (context) => EarnHome(),
+
         '/home': (context) => Home(userName: '', userEmail: ''),
         // '/history': (context) => TransactionHistory(),
         // '/documentation': (context) => Documentation(),
@@ -162,30 +123,6 @@ class MyApp extends StatelessWidget {
         '/forgotpassword': (context) => ForgotPassword(),
         '/profile': (context) => ProfileScreen(),
         '/policy': (context) => spiiiqRewardPolicyScreen(),
-        // '/verify': (context) => Verify(mnemonic: ''),
-        // '/confirm': (context) => Confirm(words: []),
-        // '/forgotc': (context) => ForgotConfirm(words: []),
-        // '/changepassword': (context) => ChangePassword(),
-        // '/addmoney': (context) => AddMoney(),
-        // '/withdraw': (context) => Withdraw(),
-        // '/exchange': (context) => Exchange(),
-        // '/pXp': (context) => Pxp(),
-        // '/pXphome': (context) {
-        //   final authController = Get.find<AuthController>();
-        //   final user = authController.currentUser;
-        //   if (user == null) return const EarnLogin();
-        //   return ExchangeUI(userId: user.uid);
-        // },
-        // '/blocks': (context) => Blocks(),
-        // '/cowriexdetails': (context) => CowriexDetails(),
-        // '/buy': (context) => Buy(),
-        // '/sell': (context) => Sell(),
-        // '/tokendata': (context) => TokenData(),
-        // '/walletaddress': (context) => WalletAddress(),
-        // '/publickey': (context) => PublicKey(),
-        // '/whitepaper': (context) => Documentation(),
-        // '/mine': (context) => Mine(),
-        // '/answer': (context) => Answer(),
       },
     );
   }

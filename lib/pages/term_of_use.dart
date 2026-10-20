@@ -84,7 +84,7 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         content: const Text(
-          'You need to accept the Terms of Use to continue using Textido. '
+          'You need to accept the Terms of Use to continue using SpiiiQ. '
           'You can review the terms again before deciding.',
           style: TextStyle(color: Colors.black87),
         ),
@@ -191,7 +191,7 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                 children: [
                   _buildCheckRow(
                     value: hasReadTerms,
-                    label: 'I have read and agree to the Textido Terms of Use.',
+                    label: 'I have read and agree to the SpiiiQ Terms of Use.',
                     onChanged: (v) => setState(() => hasReadTerms = v ?? false),
                   ),
                   _buildCheckRow(
@@ -328,7 +328,7 @@ To maintain a safe and respectful environment, every user must:
 - Share lawful and truthful content.
 - Respect the rights and privacy of others.
 - Follow all applicable laws.
-- Use Textido responsibly.
+- Use SpiiiQ responsibly.
 
 You are solely responsible for the content you create, upload, or share.
 

@@ -1,6 +1,5 @@
 import 'package:spiiiq/controllers/account_controller.dart';
 
-import 'package:spiiiq/controllers/chat_list_controller.dart';
 import 'package:spiiiq/controllers/pay_history_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
@@ -15,7 +14,6 @@ class PayHistoryPage extends StatefulWidget {
 }
 
 class _PayHistoryPageState extends State<PayHistoryPage> {
-  final ChatListController controller = Get.put(ChatListController());
   final ThemeController themeCtrl = Get.put(ThemeController());
   final AccountController accountController = Get.put(AccountController());
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
@@ -29,10 +27,7 @@ class _PayHistoryPageState extends State<PayHistoryPage> {
     super.initState();
     accountController.fetchUserInfo();
     //accountController.fetchBalances();
-    accountController.fetchWalletAddress();
-    accountController.toggleBalanceVisibility();
-    accountController.fetchWalletDetails();
-    accountController.fetchWalletData();
+
     // addMoneyController.fetchVaultBalance();
 
     // ever(addMoneyController.email, (String email) {
