@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdsController extends GetxController {
+class AnnouncementController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthController _auth = Get.find<AuthController>();
   final ThemeController _themeCtrl = Get.find<ThemeController>();
@@ -24,10 +24,6 @@ class AdsController extends GetxController {
     _autoCleanupExpiredAds();
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                               🔹 ADS LIST                                  */
-  /* -------------------------------------------------------------------------- */
-
   void _listenToAds() {
     _firestore
         .collection('ads')
@@ -45,13 +41,6 @@ class AdsController extends GetxController {
         });
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                       🔐 ADD AD (VERIFIED ONLY)                             */
-  /* -------------------------------------------------------------------------- */
-
-  /// 🔹 Post an ad — text only (title + description), no avatar.
-  /// No verification gate and no per-user/day posting limit: any signed-in
-  /// user can post as many ads as they like.
   Future<void> addAd({
     required String title,
     required String description,
@@ -70,7 +59,6 @@ class AdsController extends GetxController {
 
     final now = DateTime.now();
 
-    // 🔹 Add ad
     await _firestore.collection('ads').add({
       'uid': uid,
       'title': title.trim(),
@@ -83,22 +71,10 @@ class AdsController extends GetxController {
     _snack('Ad posted', 'Your ad is live');
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                   📢 SPONSORED SLOTS FOR THE MAIN FEED                     */
-  /* -------------------------------------------------------------------------- */
-
-  /// 🔹 Returns the ad to show at a given sponsored "slot" in a feed — one
-  /// slot is requested after every 5 normal posts. Cycles through the live
-  /// `ads` list so slots keep rotating through every ad as more are posted.
-  /// Returns null when there are no ads to show yet.
   Map<String, dynamic>? adForSlot(int slot) {
     if (ads.isEmpty) return null;
     return ads[slot % ads.length];
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                     ⏳ AUTO DELETE EXPIRED ADS                              */
-  /* -------------------------------------------------------------------------- */
 
   Future<void> _autoCleanupExpiredAds() async {
     final now = Timestamp.now();
@@ -110,37 +86,6 @@ class AdsController extends GetxController {
 
     for (final doc in expired.docs) {
       await doc.reference.delete();
-    }
-  }
-
-  /// Reward the user for clicking an ad link (once per ad)
-  Future<void> handleAdLinkClickReward(String adId) async {
-    try {
-      final user = _auth.currentUser;
-      if (user == null) return;
-
-      final rewardRef = _firestore
-          .collection('adRewards')
-          .doc(user.uid)
-          .collection('clickedAds')
-          .doc(adId);
-
-      final rewardSnap = await rewardRef.get();
-      if (!rewardSnap.exists) {
-        // ✅ Reward purely by UID
-        await _rewardCtrl.incrementTinyReward(uid: user.uid);
-        print("💰 Rewarded ${user.uid} for clicking ad: $adId");
-
-        // ✅ Mark as rewarded
-        await rewardRef.set({
-          'rewarded': true,
-          'clickedAt': FieldValue.serverTimestamp(),
-        });
-      } else {
-        print("ℹ️ User already rewarded for this ad: $adId");
-      }
-    } catch (e) {
-      print("❌ Error rewarding user for ad click: $e");
     }
   }
 

@@ -104,18 +104,12 @@ class _EarnLoginState extends State<EarnLogin> {
                 Column(
                   children: const [
                     Text(
-                      'Continue with your Textido account',
+                      'Sign in to continue to SpiiiQ.',
                       style: TextStyle(
                         fontSize: 13,
+                        color: Colors.black54,
                         fontWeight: FontWeight.w700,
-                        color: Colors.black,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      'Sign in to continue to SpiiiQ.',
-                      style: TextStyle(fontSize: 13, color: Colors.black54),
                       textAlign: TextAlign.center,
                     ),
                   ],

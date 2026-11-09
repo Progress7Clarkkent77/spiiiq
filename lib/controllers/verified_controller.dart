@@ -64,33 +64,6 @@ class VerifiedController extends GetxController {
     });
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                           ⏳ CHECK EXPIRY                                   */
-  /* -------------------------------------------------------------------------- */
-
-  // Future<void> _checkExpiry() async {
-  //   if (verifiedExpiresAt.value == null || uid == null) return;
-
-  //   final now = DateTime.now();
-  //   final expiry = verifiedExpiresAt.value!;
-
-  //   final remaining = expiry.difference(now).inDays;
-  //   daysLeft.value = remaining < 0 ? 0 : remaining;
-
-  //   if (now.isAfter(expiry) && isVerified.value) {
-  //     await _firestore.collection('e-users').doc(uid).update({
-  //       'verified': false,
-  //       'verifiedAt': null,
-  //       'verifiedExpiresAt': null,
-  //     });
-
-  //     isVerified.value = false;
-  //     verifiedAt.value = null;
-  //     verifiedExpiresAt.value = null;
-  //     daysLeft.value = 0;
-  //   }
-  // }
-
   Future<void> _checkExpiry() async {
     if (verifiedExpiresAt.value == null || uid == null) return;
 

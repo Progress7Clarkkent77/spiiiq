@@ -16,7 +16,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:spiiiq/controllers/account_controller.dart';
-import 'package:spiiiq/controllers/ads_controller.dart';
+
+import 'package:spiiiq/controllers/announcement_controller.dart';
 import 'package:spiiiq/controllers/e_login_controller.dart';
 import 'package:spiiiq/controllers/balance_controller.dart';
 
@@ -25,12 +26,10 @@ import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/pages/add_status.dart';
 
 import 'package:spiiiq/pages/comment_screen.dart';
-import 'package:spiiiq/pages/pay_history.dart';
+
 import 'package:spiiiq/pages/policy.dart';
-import 'package:spiiiq/pages/profile.dart';
+
 import 'package:spiiiq/pages/public_profile.dart';
-import 'package:spiiiq/pages/status_screen.dart';
-import 'package:spiiiq/pages/withdrawal_page.dart';
 import 'package:spiiiq/widgets/report_reason_dialog.dart';
 import 'package:spiiiq/widgets/premium_dialogs.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
@@ -62,25 +61,12 @@ class _HomeState extends State<Home> {
   );
   final StatusController statusCtrl = Get.put(StatusController());
   final ScrollController _scrollController = ScrollController();
-  final AdsController adsCtrl = Get.find<AdsController>();
+  final AnnouncementController adsCtrl = Get.find<AnnouncementController>();
 
   @override
   void initState() {
     super.initState();
     accountController.fetchUserInfo();
-
-    ///accountController.fetchBalances();
-    // accountController.fetchWalletAddress();
-    //  accountController.toggleBalanceVisibility();
-    // accountController.fetchWalletDetails();
-    // accountController.fetchWalletData();
-    // addMoneyController.fetchVaultBalance();
-
-    // ever(addMoneyController.email, (String email) {
-    //   if (email.isNotEmpty) {
-    //     addMoneyController.fetchTransactions(email);
-    //   }
-    // });
   }
 
   String selectedCurrency = "\$ Dollar";
@@ -386,70 +372,7 @@ class _HomeState extends State<Home> {
           body: Column(
             children: [
               // 🔍 Search Bar
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-              //   child: TextField(
-              //     onChanged: (v) => controller.searchQuery.value = v,
-              //     style:
-              //         TextStyle(color: isDark ? Colors.white : Colors.black87),
-              //     decoration: InputDecoration(
-              //       hintText: 'Search posts...',
-              //       prefixIcon: Icon(Icons.search,
-              //           color: isDark ? Colors.white38 : Colors.black38),
-              //       filled: true,
-              //       fillColor:
-              //           isDark ? Colors.grey.shade900 : Colors.grey.shade200,
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(14),
-              //         borderSide: BorderSide.none,
-              //       ),
-              //     ),
-              //   ),
-              // ),
 
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(16, 12, 16, 10),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //       color: isDark ? Colors.grey.shade900 : Colors.grey.shade100,
-              //       borderRadius: BorderRadius.circular(18),
-              //       boxShadow: [
-              //         BoxShadow(
-              //           color: Colors.black.withOpacity(0.05),
-              //           blurRadius: 10,
-              //           offset: const Offset(0, 4),
-              //         ),
-              //       ],
-              //     ),
-              //     child: TextField(
-              //       onChanged: (value) {
-              //         statusCtrl.searchQuery.value = value;
-              //       },
-              //       style: TextStyle(
-              //         color: isDark ? Colors.white : Colors.black,
-              //         fontSize: 14,
-              //       ),
-              //       decoration: InputDecoration(
-              //         hintText: 'Search post by user',
-              //         hintStyle: TextStyle(
-              //           color: isDark ? Colors.grey : Colors.black54,
-              //         ),
-              //         prefixIcon: Icon(
-              //           Icons.search_rounded,
-              //           color: isDark ? Colors.white70 : Colors.black54,
-              //         ),
-              //         filled: true,
-              //         fillColor: Colors.transparent,
-              //         border: OutlineInputBorder(
-              //           borderRadius: BorderRadius.circular(18),
-              //           borderSide: BorderSide.none,
-              //         ),
-              //         contentPadding: const EdgeInsets.symmetric(vertical: 14),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Divider(
                 height: 1,
                 thickness: 0.5,
@@ -1110,38 +1033,10 @@ class _HomeState extends State<Home> {
                         label: 'Policy',
                         isDark: isDark,
                         onTap: () {
-                          // Get.to(() => StatusScreen(
-                          //       userName: accountController.userName.value,
-                          //       userEmail: accountController.userEmail.value,
-                          //     ));
-
-                          //Get.to(() => spiiiqRewardPolicyScreen());
                           openPrivacyPolicy();
                         },
                       ),
-                      // _bottomBarItem(
-                      //   icon: Icons.view_list,
-                      //   label: 'Channels',
-                      //   isDark: isDark,
-                      //   onTap: () {
-                      //     // Get.to(() => ChannelsScreen(
-                      //     //       userName: accountController.userName.value,
-                      //     //       userEmail: accountController.userEmail.value,
-                      //     //     ));
-                      //   },
-                      // ),
-                      // _bottomBarItem(
-                      //   icon: Icons.emoji_events,
-                      //   label: 'TSC',
-                      //   isDark: isDark,
-                      //   onTap: () {
-                      //     Get.to(() => Tsc(
-                      //           //SplendorsContest(
-                      //           userName: accountController.userName.value,
-                      //           userEmail: accountController.userEmail.value,
-                      //         ));
-                      //   },
-                      // ),
+
                       _bottomBarItem(
                         icon: Icons.add,
                         label: 'Add Post',
@@ -1367,10 +1262,6 @@ List<TextSpan> _linkifySponsoredText(String text, bool isDark, String? adId) {
 
             if (await canLaunchUrl(url)) {
               await launchUrl(url, mode: LaunchMode.externalApplication);
-
-              if (adId != null) {
-                await Get.find<AdsController>().handleAdLinkClickReward(adId);
-              }
             }
           },
       ),

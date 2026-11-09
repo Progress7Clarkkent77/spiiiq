@@ -1,4 +1,4 @@
-import 'package:spiiiq/controllers/ads_controller.dart';
+import 'package:spiiiq/controllers/announcement_controller.dart';
 
 import 'package:spiiiq/controllers/moderation_controller.dart';
 
@@ -11,8 +11,7 @@ import 'package:spiiiq/pages/home.dart';
 import 'package:spiiiq/controllers/user_presence_controller.dart';
 import 'package:spiiiq/controllers/verified_controller.dart';
 import 'package:spiiiq/pages/forgotpassword.dart';
-import 'package:spiiiq/services/fcm_background.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,7 +81,7 @@ void initControllers() {
   //Get.lazyPut(() => ChatController(), fenix: true);
   Get.lazyPut(() => StatusController(), fenix: true);
 
-  Get.lazyPut(() => AdsController(), fenix: true);
+  Get.lazyPut(() => AnnouncementController(), fenix: true);
 
   // 🔹 HotGist category controllers — lazy so each is only created
   // when its screen is first opened, and disposed (listeners
