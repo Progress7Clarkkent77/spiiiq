@@ -1,15 +1,3 @@
-//   static void requestPlay(VoidCallback pauseThis) {
-//     if (_pauseCurrent != null && _pauseCurrent != pauseThis) {
-//       _pauseCurrent!.call();
-//     }
-//     _pauseCurrent = pauseThis;
-//   }
-
-//   static void clearIfCurrent(VoidCallback pauseThis) {
-//     if (_pauseCurrent == pauseThis) _pauseCurrent = null;
-//   }
-// }
-
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -26,12 +14,15 @@ import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/pages/add_status.dart';
 
 import 'package:spiiiq/pages/comment_screen.dart';
+import 'package:spiiiq/pages/games_page.dart';
 
 import 'package:spiiiq/pages/policy.dart';
 
 import 'package:spiiiq/pages/public_profile.dart';
+import 'package:spiiiq/pages/rooms_page.dart';
 import 'package:spiiiq/widgets/report_reason_dialog.dart';
 import 'package:spiiiq/widgets/premium_dialogs.dart';
+import 'package:spiiiq/widgets/spiiiq_footer.dart';
 import 'package:spiiiq/widgets/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
@@ -996,79 +987,31 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
+
           bottomNavigationBar: Obx(() {
             final isDark = themeCtrl.isDarkMode.value;
 
-            return SafeArea(
-              top: false,
-              child: Padding(
-                // keeps every side away from the screen edges
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isDark ? Colors.grey.shade900 : Colors.white,
-                    border: Border.all(
-                      color: isDark ? Colors.white12 : Colors.black12,
-                      width: 0.8,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(isDark ? 0.45 : 0.12),
-                        blurRadius: 24,
-                        spreadRadius: 1,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _bottomBarItem(
-                        icon: Icons.policy,
-                        label: 'Policy',
-                        isDark: isDark,
-                        onTap: () {
-                          openPrivacyPolicy();
-                        },
-                      ),
-
-                      _bottomBarItem(
-                        icon: Icons.add,
-                        label: 'Add Post',
-                        isDark: isDark,
-                        onTap: () {
-                          final currentUserName =
-                              accountController.userName.value;
-                          final currentUserEmail =
-                              accountController.userEmail.value;
-
-                          Get.to(
-                            () => AddStatus(
-                              userName: currentUserName,
-                              userEmail: currentUserEmail,
-                            ),
-                            transition: Transition.cupertino,
-                          );
-                        },
-                      ),
-                      _bottomBarItem(
-                        icon: Icons.person,
-                        label: 'Profile',
-                        isDark: isDark,
-                        onTap: () {
-                          //Get.to(() => const ProfileScreen());
-                          Get.toNamed('/profile');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+            return SpiiiqFooter(
+              isDark: isDark,
+              onPolicy: openPrivacyPolicy,
+              onRooms: () => Get.to(
+                () => const RoomsPage(),
+                transition: Transition.cupertino,
               ),
+              onAddPost: () {
+                Get.to(
+                  () => AddStatus(
+                    userName: accountController.userName.value,
+                    userEmail: accountController.userEmail.value,
+                  ),
+                  transition: Transition.cupertino,
+                );
+              },
+              onGames: () => Get.to(
+                () => const GamesPage(),
+                transition: Transition.cupertino,
+              ),
+              onProfile: () => Get.toNamed('/profile'),
             );
           }),
         );
@@ -1076,14 +1019,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  /// 📢 SPONSORED CARD
-  ///
-  /// Same row/divider layout as a normal post — a Container with vertical
-  /// padding and a bottom border, no background fill, no rounded card, no
-  /// shadow — so it sits in the feed like any other post. Pulls from
-  /// `adsCtrl.ads` — no like/comment affordances, no post restrictions on
-  /// the ad side, just a campaign "avatar", title + description with
-  /// clickable links, and a "Sponsored" tag in place of the name/handle row.
   Widget _buildSponsoredCard(bool isDark, int slot) {
     return Obx(() {
       final ad = adsCtrl.adForSlot(slot);
@@ -1188,9 +1123,6 @@ class _HomeState extends State<Home> {
   }
 }
 
-/// 📢 Marks a sponsored-ad slot in the interleaved feed list built by
-/// `_buildFeedItems`. `slot` increments each time one is inserted, so
-/// consecutive sponsored slots rotate through every live ad in order.
 class _SponsoredSlot {
   final int slot;
   const _SponsoredSlot(this.slot);
@@ -1213,9 +1145,6 @@ List<dynamic> _buildFeedItems(List<DocumentSnapshot> posts) {
   return items;
 }
 
-/// 🔹 Same link-detection as `_linkifyText`, but for sponsored-ad text:
-/// tapping a link also rewards the ad owner once per ad via
-/// `AdsController.handleAdLinkClickReward`.
 List<TextSpan> _linkifySponsoredText(String text, bool isDark, String? adId) {
   final RegExp linkRegex = RegExp(
     r'((https?:\/\/|www\.)\S+|\S+\.com)',
@@ -1285,38 +1214,6 @@ List<TextSpan> _linkifySponsoredText(String text, bool isDark, String? adId) {
 
   return spans;
 }
-
-// Widget _fabWithLabel({
-//   required String heroTag,
-//   required IconData icon,
-//   required String label,
-//   required bool isDark,
-//   required VoidCallback onPressed,
-// }) {
-//   return Column(
-//     mainAxisSize: MainAxisSize.min,
-//     children: [
-//       FloatingActionButton(
-//         heroTag: heroTag,
-//         backgroundColor: isDark ? Colors.white : Colors.black.withOpacity(0.65),
-//         onPressed: onPressed,
-//         child: Icon(
-//           icon,
-//           color: isDark ? Colors.black : Colors.white,
-//         ),
-//       ),
-//       const SizedBox(height: 6),
-//       Text(
-//         label,
-//         style: TextStyle(
-//           fontSize: 12,
-//           fontWeight: FontWeight.w500,
-//           color: isDark ? Colors.white : Colors.black,
-//         ),
-//       ),
-//     ],
-//   );
-// }
 
 Widget _bottomBarItem({
   required IconData icon,

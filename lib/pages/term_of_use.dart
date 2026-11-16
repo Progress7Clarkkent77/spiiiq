@@ -8,34 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// =====================================================================
-/// TERMS OF USE / EULA GATE — PRE-LOGIN GATE VERSION
-/// ---------------------------------------------------------------------
-/// Shown as soon as AuthController.login() has verified the entered
-/// email/password against Firebase Auth but found that the matching
-/// e-users doc does not yet have 'termsAccepted' == true. Login is
-/// intentionally left incomplete at that point — no FCM token save, no
-/// presence update, no theme/chat setup, no navigation to '/home' — so
-/// this screen is the only thing standing between the user and their
-/// account.
-///
-/// On accept: writes 'termsAccepted' + 'termsAcceptedAt' to the user's
-/// e-users doc, signs the user back out, and returns to '/login'. The
-/// user must then log in again; on that second attempt
-/// AuthController.login() will see termsAccepted == true and complete
-/// the full login flow normally.
-///
-/// On decline: signs the user out and returns to '/login' without
-/// recording acceptance, so the next login attempt hits this gate again.
-///
-/// Firestore (not SharedPreferences) is the source of truth here since
-/// nothing on this screen runs before Firebase Auth already has a
-/// signed-in user — this also means acceptance follows the account
-/// across devices/reinstalls.
-///
-/// Wire-up: called via Get.off(() => const TermsOfUseScreen()) from
-/// AuthController.login().
-/// =====================================================================
 class TermsOfUseScreen extends StatefulWidget {
   const TermsOfUseScreen({super.key});
 

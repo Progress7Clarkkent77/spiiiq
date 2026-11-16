@@ -34,29 +34,11 @@ class _CommentScreenState extends State<CommentScreen> {
 
   final AccountController accountController = Get.put(AccountController());
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
-  // final CurrencyController currencyController = Get.put(CurrencyController());
-  // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
 
   @override
   void initState() {
     super.initState();
     accountController.fetchUserInfo();
-    //accountController.fetchBalances(); // Fetch data on widget load
-    // accountController.fetchWalletAddress(); // Fetch wallet address on init
-    // accountController.toggleBalanceVisibility();
-    // accountController.fetchWalletDetails();
-    // accountController
-    //     .fetchWalletAddress(); // Fetch wallet address on initialization
-    // accountController
-    //     .fetchWalletData(); // Fetch both address & publicKey on init
-    // addMoneyController.fetchVaultBalance();
-
-    // Watch for email availability and fetch transactions once it's ready
-    // ever(addMoneyController.email, (String email) {
-    //   if (email.isNotEmpty) {
-    //     addMoneyController.fetchTransactions(email);
-    //   }
-    // });
   }
 
   /// 🔹 Fetch verified status for the user
@@ -86,9 +68,6 @@ class _CommentScreenState extends State<CommentScreen> {
     return Obx(() {
       final isDark = themeCtrl.isDarkMode.value;
 
-      /// 🔹 Watched here so the send button can switch to a spinner while
-      /// postComment() is running, the same way ChatController.isSending
-      /// drives the send button in the chat screen.
       final sendingComment = statusCtrl.isPostingComment.value;
 
       return Scaffold(

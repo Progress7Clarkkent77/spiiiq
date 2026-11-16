@@ -17,22 +17,11 @@ class _PayHistoryPageState extends State<PayHistoryPage> {
   final ThemeController themeCtrl = Get.put(ThemeController());
   final AccountController accountController = Get.put(AccountController());
   final IconNavigationHandler navigationHandler = IconNavigationHandler();
-  // final CurrencyController currencyController = Get.put(CurrencyController());
-  // final AddMoneyController addMoneyController = Get.find<AddMoneyController>();
 
   @override
   void initState() {
     super.initState();
     accountController.fetchUserInfo();
-    //accountController.fetchBalances();
-
-    // addMoneyController.fetchVaultBalance();
-
-    // ever(addMoneyController.email, (String email) {
-    //   if (email.isNotEmpty) {
-    //     addMoneyController.fetchTransactions(email);
-    //   }
-    // });
   }
 
   String selectedCurrency = "\$ Dollar";

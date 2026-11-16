@@ -28,10 +28,6 @@ class VerifiedController extends GetxController {
     _waitForUserAndListen();
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                  ⏳ WAIT FOR AUTH THEN ATTACH LISTENER                      */
-  /* -------------------------------------------------------------------------- */
-
   void _waitForUserAndListen() async {
     /// Wait until Firebase auth is hydrated (web-safe)
     while (_auth.currentUser == null) {
@@ -40,10 +36,6 @@ class VerifiedController extends GetxController {
 
     _listenToVerification();
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                         🔍 LISTEN TO USER STATUS                           */
-  /* -------------------------------------------------------------------------- */
 
   void _listenToVerification() {
     if (uid == null || _listenerAttached) return;
@@ -88,10 +80,6 @@ class VerifiedController extends GetxController {
     }
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                     🔐 ACTIVATE / EXTEND VERIFICATION                       */
-  /* -------------------------------------------------------------------------- */
-
   Future<void> _activateOrExtendVerification() async {
     if (uid == null) return;
 
@@ -113,10 +101,6 @@ class VerifiedController extends GetxController {
 
     _snack('Verified Successfully', 'Your verification is active');
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                              🔔 SNACKBAR                                   */
-  /* -------------------------------------------------------------------------- */
 
   void _snack(String title, String message) {
     Get.snackbar(

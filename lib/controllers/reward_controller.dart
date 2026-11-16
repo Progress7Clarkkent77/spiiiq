@@ -1,60 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-// class RewardController extends GetxController {
-//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-//   final AuthController authController = Get.find<AuthController>();
-
-//   /// Increment user's available balance by 0.0001
-//   Future<void> incrementTinyReward() async {
-//     await _incrementBalance(0.00005);
-//   }
-
-//   /// Increment user's available balance by 0.007
-//   Future<void> incrementSmallReward() async {
-//     await _incrementBalance(0.002);
-//   }
-
-//   /// Increment user's available balance by 0.005
-//   Future<void> incrementMediumReward() async {
-//     await _incrementBalance(0.005);
-//   }
-
-//   Future<void> incrementRefer() async {
-//     await _incrementBalance(0.003);
-//   }
-
-//   Future<void> incrementChatReward() async {
-//     await _incrementBalance(0.00005);
-//   }
-
-//   /// Generic function to increment user's balance safely
-//   Future<void> _incrementBalance(double amount) async {
-//     final uid = authController.currentUser?.uid;
-//     if (uid == null) return;
-
-//     try {
-//       final userRef = _firestore.collection('e-users').doc(uid);
-//       final userSnap = await userRef.get();
-
-//       double currentBal = 0.0;
-//       if (userSnap.exists) {
-//         final data = userSnap.data();
-//         final rawBal = data?['available_bal'];
-//         if (rawBal is num) currentBal = rawBal.toDouble();
-//       }
-
-//       // Update Firestore with new balance
-//       await userRef.update({'available_bal': currentBal + amount});
-//       print(
-//           "Balance incremented by $amount. New balance: ${currentBal + amount}");
-//     } catch (e, stack) {
-//       print("RewardController Exception: $e");
-//       print("StackTrace: $stack");
-//     }
-//   }
-// }
-
 class RewardController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 

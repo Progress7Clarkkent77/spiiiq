@@ -7,6 +7,7 @@ import 'package:spiiiq/controllers/reward_controller.dart';
 import 'package:spiiiq/controllers/status_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:spiiiq/controllers/user_controller.dart';
+import 'package:spiiiq/controllers/word_throne_controller.dart';
 import 'package:spiiiq/pages/home.dart';
 import 'package:spiiiq/controllers/user_presence_controller.dart';
 import 'package:spiiiq/controllers/verified_controller.dart';
@@ -82,10 +83,7 @@ void initControllers() {
   Get.lazyPut(() => StatusController(), fenix: true);
 
   Get.lazyPut(() => AnnouncementController(), fenix: true);
-
-  // 🔹 HotGist category controllers — lazy so each is only created
-  // when its screen is first opened, and disposed (listeners
-  // cancelled via onClose) when no longer referenced.
+  Get.lazyPut(() => WordThroneController(), fenix: true);
 }
 
 class MyApp extends StatelessWidget {

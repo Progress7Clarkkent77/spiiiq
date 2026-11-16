@@ -14,11 +14,6 @@ import 'package:spiiiq/pages/avatar_screen.dart';
 import 'package:spiiiq/pages/pay_history.dart';
 import 'package:spiiiq/pages/withdrawal_page.dart';
 
-/// ─────────────────────────────────────────────────────────────
-/// DESIGN TOKENS
-/// One place for every colour. Gold is the single accent and is
-/// only used on the avatar ring and the wallet card.
-/// ─────────────────────────────────────────────────────────────
 const Color _gold = Color(0xFFD4B26A);
 const Color _ink = Color(0xFF0B0B0D);
 const Color _danger = Color(0xFFE5484D);

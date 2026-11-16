@@ -9,14 +9,6 @@ import 'package:spiiiq/controllers/e_login_controller.dart';
 import 'package:spiiiq/controllers/theme_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// 🔹 Referral system, code-based:
-/// - Every user has a 6-digit `referCode` on their e-users doc, generated
-///   by AuthController (on signup, and backfilled on login).
-/// - This controller just displays that code as simple, copiable text —
-///   no submissions, no admin approval.
-/// - The actual reward is handled entirely by AuthController: when a new
-///   user who entered someone's referCode at signup gets their `verify`
-///   field set to true, that referrer is rewarded automatically (once).
 class ReferController extends GetxController {
   final AuthController authController = Get.find<AuthController>();
   final ThemeController themeController = Get.find<ThemeController>();

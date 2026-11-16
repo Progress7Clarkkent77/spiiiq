@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Premium "Are you sure you want to log out?" confirmation dialog.
 class PremiumLogoutDialog extends StatelessWidget {
   final bool isDark;
   final VoidCallback onConfirm;

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// =====================================================================
-/// Reason lists — exactly as specified for each moderation action.
-/// =====================================================================
 const List<String> kFlagPostReasons = [
   'Spam or Misleading Content',
   'Hate Speech or Harassment',
@@ -37,23 +34,6 @@ const List<String> kReportChannelReasons = [
   'Other',
 ];
 
-/// =====================================================================
-/// REPORT REASON DIALOG
-/// ---------------------------------------------------------------------
-/// A single, reusable "premium" white dialog used for:
-///   - Flagging a post
-///   - Reporting a user
-///   - Blocking a user
-///
-/// Usage:
-///   ReportReasonDialog.show(
-///     context: context,
-///     title: 'Report this post',
-///     reasons: kFlagPostReasons,
-///     confirmLabel: 'Report Post',
-///     onConfirm: (reason) async { ... },
-///   );
-/// =====================================================================
 class ReportReasonDialog extends StatefulWidget {
   final String title;
   final List<String> reasons;

@@ -122,6 +122,8 @@ class ModerationController extends GetxController {
     required String postId,
     required String postText,
     String? postImageUrl,
+    String? roomId,
+    String? roomName,
     required String postOwnerEmail,
     required String postOwnerName,
     required String reason,
@@ -138,6 +140,8 @@ class ModerationController extends GetxController {
         'postOwnerName': postOwnerName,
         'reportedByUid': user.uid,
         'reportedByEmail': user.email ?? '',
+        'roomId': roomId,
+        'roomName': roomName,
         'reason': reason,
         'timestamp': FieldValue.serverTimestamp(),
       });
